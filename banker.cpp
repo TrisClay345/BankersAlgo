@@ -24,15 +24,14 @@ int main(int argc, char* argv[]) {
     // Represents number of available instances of each resource
     int available[numResources];
 
-    // Represents number of allocated instances
-    // of each resource to a process
+    // Represents current number of allocated instances of each resource to a process
     int allocated[numProcess][numResources];
     
-    // Represents max number of allocated instances 
-    // of each resource allowed
+    // Represents max number of allocated instances of each resource that the process could demand
     int max[numProcess][numResources];
 
     // Gets table values from the inputted text file
+
     int input = 0;
     int processCount = 0;
     int i = 0;
@@ -63,6 +62,8 @@ int main(int argc, char* argv[]) {
         }
     }
 
+    // Stores whether a process is completed or not. Initially all false 
+    // since none of the processes have executed
     bool finish[numProcess] = {0};
 
     // Stores safe sequence
@@ -105,7 +106,7 @@ int main(int argc, char* argv[]) {
         // the system is not in a safe state
         if(found == false) {
             std::cout << "The system is not in a safe state." << std::endl;
-            break;
+            exit(0);
         }
     }
     // If the system is safe, print the safe sequence (order that processes can be completed
@@ -115,4 +116,5 @@ int main(int argc, char* argv[]) {
         std::cout << 'p' << safeSeq[i] << ' ';
     }
     std::cout << std::endl;
+    exit(0);
 }
